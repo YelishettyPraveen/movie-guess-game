@@ -484,6 +484,28 @@ input {
 }
 
 @media (max-width: 840px) {
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .page-shell {
+    min-height: auto;
+    grid-template-rows: auto;
+  }
+
+  .app-card {
+    overflow: visible;
+  }
+
+  .screen {
+    height: auto;
+  }
+
+  .setup-layout {
+    min-height: auto;
+  }
+
   .setup-layout {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -520,11 +542,13 @@ input {
 
   .page-shell {
     width: min(100% - 12px, 100%);
-    padding: 8px 0;
+    min-height: auto;
+    padding: 8px 0 18px;
     gap: 8px;
   }
 
   .screen {
+    height: auto;
     padding: 12px;
   }
 
