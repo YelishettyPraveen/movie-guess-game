@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Guess Offline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Offline Mode</p>
+      <h1>Movie Guess</h1>
+      <p class="hero-copy">One player sets the movie. The other has to uncover it before the attempts word disappears.</p>
+    </header>
+
+    <main class="app-card">
+      <section class="screen active" data-screen="setup" aria-labelledby="setup-title">
+        <div class="setup-layout">
+          <div class="setup-intro">
+            <p class="step">Offline Round</p>
+            <h2 id="setup-title">Set the secret and start fast</h2>
+            <p class="setup-copy">Use a movie title and an attempts word. The guesser will only see blanks, your attempts word, and the keyboard.</p>
+
+            <div class="setup-notes">
+              <div class="setup-note">
+                <strong>Movie</strong>
+                <span>Letters and spaces only. Maximum 50 characters.</span>
+              </div>
+              <div class="setup-note">
+                <strong>Attempts</strong>
+                <span>Letters and numbers only. Default is <b>TOLLYWOOD</b>.</span>
+              </div>
+              <div class="setup-note">
+                <strong>Flow</strong>
+                <span>Each wrong guess strikes one character from left to right.</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="setup-form" class="stack setup-form-card" novalidate>
+            <label class="field">
+              <span>Secret movie name</span>
+              <div class="input-row">
+                <input id="movie-input" name="movie" type="password" inputmode="text" autocomplete="off" maxlength="50" placeholder="TYPE MOVIE NAME" required>
+                <button id="movie-visibility-btn" class="ghost-button" type="button" aria-pressed="false">Show</button>
+              </div>
+            </label>
+
+            <label class="field">
+              <span>Attempts word</span>
+              <input id="attempts-input" name="attempts" type="text" inputmode="text" autocomplete="off" maxlength="20" value="TOLLYWOOD" placeholder="TOLLYWOOD" required>
+            </label>
+
+            <div id="setup-error" class="message error" role="alert" aria-live="polite"></div>
+
+            <button class="primary-button" type="submit">Start Game</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="game" aria-labelledby="game-title">
+        <div class="screen-head game-head">
+          <div class="status-cluster">
+            <div class="status-pill">
+              <span>Time</span>
+              <strong id="timer-display">00:00</strong>
+            </div>
+            <button id="quit-btn" class="ghost-button" type="button">Quit / Reset</button>
+          </div>
+        </div>
+
+        <div class="game-layout">
+          <section class="panel attempts-panel">
+            <div class="attempts-heading">
+              <span id="attempts-progress" class="attempts-progress"></span>
+            </div>
+            <div id="attempts-display" class="attempts-display" aria-live="polite"></div>
+          </section>
+
+          <section class="panel movie-panel">
+            <div id="movie-display" class="movie-display" aria-live="polite"></div>
+          </section>
+        </div>
+
+        <div id="game-message" class="message info" role="status" aria-live="polite">Pick a letter from the board or use your keyboard.</div>
+
+        <section class="panel keyboard-panel">
+          <div id="letter-grid" class="letter-grid" aria-label="Alphabet keyboard"></div>
+        </section>
+      </section>
+
+      <section class="screen" data-screen="result" aria-labelledby="result-title">
+        <div class="screen-head">
+          <p class="step">Round Complete</p>
+          <h2 id="result-title">Result</h2>
+          <p id="result-subtitle"></p>
+        </div>
+
+        <div class="result-card">
+          <div id="result-badge" class="result-badge"></div>
+          <p class="result-line">Movie: <strong id="result-movie"></strong></p>
+          <p class="result-line">Attempts word: <strong id="result-attempts"></strong></p>
+          <p class="result-line">Time taken: <strong id="result-time"></strong></p>
+          <button id="new-game-btn" class="primary-button" type="button">New Game</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="confirm-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-card">
+      <h2 id="confirm-title">Reset the round?</h2>
+      <p>The current game will be lost and the app will return to the setup screen.</p>
+      <div class="modal-actions">
+        <button id="confirm-reset-btn" class="primary-button" type="button">Yes, Reset</button>
+        <button id="cancel-reset-btn" class="ghost-button" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
